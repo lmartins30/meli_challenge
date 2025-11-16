@@ -1,0 +1,85 @@
+query_invoice_mes = """
+SELECT 
+    strftime('%Y-%m', issued_date) AS ano_mes,
+    COUNT(*) AS total_invoices
+FROM Invoice
+GROUP BY ano_mes
+ORDER BY ano_mes;
+"""
+
+con.sql(query_invoice_mes).df()
+
+query_calc_mes = """
+SELECT 
+    strftime('%Y-%m', calculation_date) AS ano_mes,
+    COUNT(*) AS total_calcs
+FROM TaxCalculation
+GROUP BY ano_mes
+ORDER BY ano_mes;
+"""
+
+con.sql(query_calc_mes).df()
+
+query_ult_mes = """
+SELECT
+    tc.category_id,
+    AVG(tc.tax_rate) AS avg_tax_month
+  FROM TaxCalculation tc -- BigQuery adjust: FROM 'project.dataset.tax_calculation' tc
+  WHERE tc.calculation_date >= date_trunc('month', current_date - INTERVAL '1 month')
+    AND tc.calculation_date < date_trunc('month', current_date)
+  GROUP BY tc.category_id
+"""
+
+con.sql(query_ult_mes).df()
+
+
+query_22 = """
+WITH last_month AS (
+  SELECT
+    tc.category_id,
+    AVG(tc.tax_rate) AS avg_tax_month
+  FROM TaxCalculation tc -- BigQuery adjust: FROM 'project.dataset.tax_calculation' tc
+  WHERE tc.calculation_date >= date_trunc('month', current_date - INTERVAL '1 month')
+    AND tc.calculation_date < date_trunc('month', current_date)
+  GROUP BY tc.category_id
+),
+prev_year AS (
+  SELECT
+    tc.category_id,
+    AVG(tc.tax_rate) AS avg_tax_prev_year
+  FROM TaxCalculation tc -- BigQuery adjust: FROM 'project.dataset.tax_calculation' tc
+  -- BigQuery adjust: JOIN 'project.dataset.item' it ON it.item_id = tc.item_id
+  WHERE EXTRACT(year FROM tc.calculation_date) = EXTRACT(year FROM current_date) - 1 -- BigQuery adjust: WHERE EXTRACT(YEAR FROM tc.calculation_date) = EXTRACT(YEAR FROM DATE_SUB(CURRENT_DATE(), INTERVAL 1 YEAR))
+  GROUP BY tc.category_id
+)
+SELECT
+  lm.category_id,
+  c.name AS category_name,
+  lm.avg_tax_month,
+  py.avg_tax_prev_year,
+  (lm.avg_tax_month - py.avg_tax_prev_year) AS desvio, -- BigQuery adjust: SAFE_SUBTRACT(lm.avg_tax_month, py.avg_tax_prev_year) AS desvio,
+  ABS(lm.avg_tax_month - py.avg_tax_prev_year) AS abs_desvio -- BigQuery adjust: ABS(SAFE_SUBTRACT(lm.avg_tax_month, py.avg_tax_prev_year)) AS abs_desvio
+FROM last_month lm
+LEFT JOIN prev_year py ON lm.category_id = py.category_id
+LEFT JOIN Categoria c ON lm.category_id = c.category_id -- BigQuery adjust: LEFT JOIN 'project.dataset.category' c USING (category_id)
+ORDER BY abs_desvio DESC
+LIMIT 3;
+"""
+
+con.sql(query_22).df()
+
+query_item_audit = """
+SELECT *
+FROM query_item_audit
+WHERE data_snapshot = current_date
+ORDER BY item_id
+LIMIT 10;
+"""
+
+con.sql(query_item_audit).df()
+
+
+import duckdb
+con = duckdb.connect("F:\desafio_meli\project\db_simulado.duckdb")
+
+con.execute("SHOW TABLES").df()

@@ -1,0 +1,16 @@
+Arquivo com os prompts utilizados:
+
+1.crie a google docstring dessa função, seja sucinto:
+def cria_banco(ddl_path, db_path):
+(e o mesmo para outras funções.)
+
+2. Traduza o código a seguir nos padrões do dbdiagram.io para gerar o diagrama:
+(der.sql)
+
+3. Me indique pontos de otimização nas queries a seguir, vou mandá-las individualmente, foque em filtros antes dos join:
+(2.1, 2.2, 2.3)
+
+4. Adapte as queries de duckdb para BigQuery seguindo o exemplo:
+LEFT JOIN Invoice i -- BigQuery adapt: LEFT JOIN 'project.dataset.Invoice' i
+para as queries a seguir:
+(2.1, 2.2, 2.3)
