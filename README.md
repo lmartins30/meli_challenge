@@ -16,24 +16,12 @@ flowchart TD
 
 ## Passo a passo
 
-### Diagrama dos Passos
-```mermaid
-flowchart TD
-    A[Início] --> B[Criar venvpython -m venv desafio_meli]
-    B --> C[Ativar venvScripts\activate]
-    C --> D[Instalar dependênciaspip install -r requirements.txt]
-    D --> E[Navegar até 02_Codeextract_compliance_data.py]
-    E --> F[Executar scriptpython extract_compliance_data.py]
-    F --> G[Gerar CSV bruto]
-    G --> H[Aplicar json_normalize]
-    H --> I[Gerar CSV normalizado]
-    I --> J[Fim]
-```
+> Requer: Python 3.11
 
-### Passos detalhados (Windows)
+### Versão Windows
 
 1. Criar o ambiente virtual com o código:  
-   `python -m venv "nome_sua_escolha"` (ex: `python -m venv desafio_meli`)
+   `python -m venv <nome_sua_escolha>` (ex: `python -m venv desafio_meli`)
 
 2. Ativar a venv:  
    ```
@@ -48,7 +36,7 @@ flowchart TD
 4. Ainda com a venv ativada, navegue até o arquivo:  
    `extract_compliance_data.py`  
    Caminho esperado:  
-   `C:\Users\"User"\"nome_sua_escolha"\project\02_Code`
+   `C:\Users\<user>\<nome_sua_escolha>\project\02_Code`
 
 5. Rodar o script:  
    `python extract_compliance_data.py`
@@ -56,28 +44,35 @@ flowchart TD
 6. Verificar arquivos gerados em:  
    `01_Datasets/`
 
-> Requer: Python 3.11
+### macOS / Linux
+
+1. Criar o ambiente virtual com o código:  
+   `python3 -m venv <nome_sua_escolha>` (ex: `python3 -m venv desafio_meli`)
+
+2. Ativar a venv:  
+   ```
+   cd "nome_sua_escolha"
+   source bin/activate
+   ```
+
+3. Instalar requirements:  
+   `pip install -r requirements.txt`  
+   > Certifique-se de que `requirements.txt` está na pasta da venv.
+
+4. Ainda com a venv ativada, navegue até o arquivo:  
+   `extract_compliance_data.py`  
+   Caminho esperado:  
+   `/Users/<user>/<nome_sua_escolha>/project/02_Code`
+
+5. Rodar o script:  
+   `python3 extract_compliance_data.py`
+
+6. Verificar arquivos gerados em:  
+   `01_Datasets/`
 
 ---
 
 ## Possíveis Bloqueios e Estratégias
-
-### Diagrama de Bloqueios
-```mermaid
-flowchart TD
-    A[Interação com API] --> B[Erro de Autenticação]
-    A --> C[Limite de Taxa (Rate Limit)]
-    A --> D[JSON Irregular ou Profundo]
-    A --> E[Falha de Rede]
-    A --> F[Ambiente Python]
-
-    B --> B1[Estratégia:Verificar token,renovar credenciais,usar .env]
-    C --> C1[Estratégia:Retry com backoff,pausas progressivas]
-    D --> D1[Estratégia:Validações,try/except,json_normalize com parâmetros]
-    E --> E1[Estratégia:Timeouts,retry,fallback para JSON simulado]
-    F --> F1[Estratégia:Conferir venv,versão do Python,pacotes instalados]
-```
-
 ### Lista Explicada
 
 1. **Token expirado ou ausente**  
