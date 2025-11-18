@@ -7,7 +7,7 @@ Este projeto simula a coleta, normalização e análise de alertas de compliance
 ```mermaid
 flowchart TD
     A[Lista de alert_ids] --> B[Loop em Python]
-    B --> C[GET na API<br>ou JSON Simulado]
+    B --> C[GET na APIou JSON Simulado]
     C --> D[Coleta dos Dados Brutos]
     D --> E[Geração de CSV]
     E --> F[Normalização com pandas.json_normalize]
@@ -19,11 +19,11 @@ flowchart TD
 ### Diagrama dos Passos
 ```mermaid
 flowchart TD
-    A[Início] --> B[Criar venv<br>python -m venv desafio_meli]
-    B --> C[Ativar venv<br>Scripts\activate]
-    C --> D[Instalar dependências<br>pip install -r requirements.txt]
-    D --> E[Navegar até 02_Code<br>extract_compliance_data.py]
-    E --> F[Executar script<br>python extract_compliance_data.py]
+    A[Início] --> B[Criar venvpython -m venv desafio_meli]
+    B --> C[Ativar venvScripts\activate]
+    C --> D[Instalar dependênciaspip install -r requirements.txt]
+    D --> E[Navegar até 02_Codeextract_compliance_data.py]
+    E --> F[Executar scriptpython extract_compliance_data.py]
     F --> G[Gerar CSV bruto]
     G --> H[Aplicar json_normalize]
     H --> I[Gerar CSV normalizado]
@@ -71,11 +71,11 @@ flowchart TD
     A --> E[Falha de Rede]
     A --> F[Ambiente Python]
 
-    B --> B1[→ Estratégia:<br>Verificar token,<br>renovar credenciais,<br>usar .env]
-    C --> C1[→ Estratégia:<br>Retry com backoff,<br>pausas progressivas]
-    D --> D1[→ Estratégia:<br>Validações,<br>try/except,<br>json_normalize com parâmetros]
-    E --> E1[→ Estratégia:<br>Timeouts,<br>retry,<br>fallback para JSON simulado]
-    F --> F1[→ Estratégia:<br>Conferir venv,<br>versão do Python,<br>pacotes instalados]
+    B --> B1[→ Estratégia:Verificar token,renovar credenciais,usar .env]
+    C --> C1[→ Estratégia:Retry com backoff,pausas progressivas]
+    D --> D1[→ Estratégia:Validações,try/except,json_normalize com parâmetros]
+    E --> E1[→ Estratégia:Timeouts,retry,fallback para JSON simulado]
+    F --> F1[→ Estratégia:Conferir venv,versão do Python,pacotes instalados]
 ```
 
 ### Lista Explicada
