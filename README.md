@@ -71,11 +71,11 @@ flowchart TD
     A --> E[Falha de Rede]
     A --> F[Ambiente Python]
 
-    B --> B1[→ Estratégia:Verificar token,renovar credenciais,usar .env]
-    C --> C1[→ Estratégia:Retry com backoff,pausas progressivas]
-    D --> D1[→ Estratégia:Validações,try/except,json_normalize com parâmetros]
-    E --> E1[→ Estratégia:Timeouts,retry,fallback para JSON simulado]
-    F --> F1[→ Estratégia:Conferir venv,versão do Python,pacotes instalados]
+    B --> B1[Estratégia:Verificar token,renovar credenciais,usar .env]
+    C --> C1[Estratégia:Retry com backoff,pausas progressivas]
+    D --> D1[Estratégia:Validações,try/except,json_normalize com parâmetros]
+    E --> E1[Estratégia:Timeouts,retry,fallback para JSON simulado]
+    F --> F1[Estratégia:Conferir venv,versão do Python,pacotes instalados]
 ```
 
 ### Lista Explicada
