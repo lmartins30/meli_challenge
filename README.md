@@ -33,15 +33,17 @@ flowchart TD
    `pip install -r requirements.txt`  
    > Certifique-se de que `requirements.txt` está na pasta da venv.
 
-4. Ainda com a venv ativada, navegue até o arquivo:  
+4. Faça o clone do repositório dentro de um diretório - sugestão de nome: project - no diretório criado(venv) no passo 1.
+
+5. Ainda com a venv ativada, navegue até o arquivo:  
    `extract_compliance_data.py`  
    Caminho esperado:  
    `C:\Users\<user>\<nome_sua_escolha>\project\02_Code`
 
-5. Rodar o script:  
+6. Rodar o script:  
    `python extract_compliance_data.py`
 
-6. Verificar arquivos gerados em:  
+7. Verificar arquivos gerados em:  
    `01_Datasets/`
 
 ### macOS / Linux
@@ -59,15 +61,17 @@ flowchart TD
    `pip install -r requirements.txt`  
    > Certifique-se de que `requirements.txt` está na pasta da venv.
 
-4. Ainda com a venv ativada, navegue até o arquivo:  
+4. Faça o clone do repositório dentro de um diretório - sugestão de nome: project - no diretório criado(venv) no passo 1.
+
+5. Ainda com a venv ativada, navegue até o arquivo:  
    `extract_compliance_data.py`  
    Caminho esperado:  
    `/Users/<user>/<nome_sua_escolha>/project/02_Code`
 
-5. Rodar o script:  
+6. Rodar o script:  
    `python3 extract_compliance_data.py`
 
-6. Verificar arquivos gerados em:  
+7. Verificar arquivos gerados em:  
    `01_Datasets/`
 
 ---
@@ -76,7 +80,7 @@ flowchart TD
 ### Lista Explicada
 
 1. **Token expirado ou ausente**  
-   - Mitigação: configurar variáveis de ambiente `.env`, validar antes da request.
+   - Mitigação: configurar variáveis de ambiente `.env`, validar antes da request. Comentário no código.
 
 2. **Headers mal formatados**  
    - Mitigação: validações pré-request.

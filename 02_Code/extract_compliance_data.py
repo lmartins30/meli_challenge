@@ -64,13 +64,28 @@ def simular_json_response_lista(num_ids=100):
 # Defs
 # -----------------------
 url_list_alerts = "https://api.mercadolibre.com/compliance_alerts?status=open&limit=100"
+
+# Simulando chaves de API externas
+# with open("config.json", "r")as f:
+#     secrets = json.load(f)
+
+# API_TOKEN = secrets['API_TOKEN']
+# CLIENT_ID = secrets['CLIENT_ID']
+# CLIENT_SECRET = secrets['CLIENT_SECRET']
+
+# Simulando header com secrets
+# headers = {
+#     "X-Client-ID": CLIENT_ID,
+#     "X-Client-Secret": CLIENT_SECRET,
+#     "Authorization": f"Bearer {API_TOKEN}"
+# }
 # -----------------------
 
 # Code
 # -----------------------
-# Do not run block below, API is fake.
+# Não rode o código abaixo, API é simulada
 # try:
-#     response = requests.get(url_list_alerts, timeout=5)
+#     response = requests.get(url_list_alerts, headers=headers, timeout=5)
 #     response.raise_for_status()
 
 #     data = response.json()
@@ -85,7 +100,8 @@ url_list_alerts = "https://api.mercadolibre.com/compliance_alerts?status=open&li
 
 # except Exception as e:
 #     print("Erro: ", e)
-
+# -------------------------------------------
+# Encerrada chamada simulada
 
 # Once the API is fake, simulating alert_ids
 data = simular_json_response_lista()
@@ -95,12 +111,12 @@ alert_ids = [item.get("id") for item in data.get("results", [])]
 alert_json = simula_json(alert_ids)
 alert_json = json.loads(alert_json)
 
-# Do not run block below, API is fake.
+# Não rode o código abaixo, API é simulada - Assumindo mesmas credenciais para as duas APIs
 # alert_detail = []
 # for alert_id in alert_ids:
 #     url = f"https://api.mercadolibre.com/compliance_alerts/{alert_id}"
 #     try:
-#         # response = requests.get(url, timeout=5)
+#         # response = requests.get(url, headers=headers, timeout=5)
 #         response.raise_for_status()
 
 #         data = response.json()
@@ -109,7 +125,9 @@ alert_json = json.loads(alert_json)
 #     except Exception as e:
 #         print("Erro: ", e)
 
-# Once the API is fake, simulating alert_details
+# -------------------------------------------
+# Encerrada chamada simulada
+
 alert_detail = []
 
 for alert_id in alert_ids:
