@@ -41,6 +41,15 @@ def load_block(sql_path, block_name):
 
 def run_block(con, sql_text: str, block_name: str):
     """
+    Executes a SQL block and prints its tabular result if available.
+
+    Args:
+        con: Database connection object with an `.execute()` method.
+        sql_text (str): SQL statement to run.
+        block_name (str): Label used to identify the executed block.
+
+    Returns:
+        None
     """
     print(f"\n==============================")
     print(f" Executando bloco {block_name}")

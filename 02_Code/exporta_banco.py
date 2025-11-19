@@ -11,6 +11,15 @@ OUTPUT_DIR = "../03_docs/export_parquet"    # pasta onde salvar os .parquet
 # EXPORTA TODAS AS TABELAS
 # ----------------------------
 def exporta_tabelas():
+    """
+    Exports all DuckDB tables to Parquet files.
+
+    Scans the connected DuckDB database, lists all tables, and writes each
+    one into the output directory as a Parquet file using COPY.
+
+    Returns:
+        None
+    """
     print("Conectando ao banco DuckDB...")
     con = duckdb.connect(DB_PATH)
 
